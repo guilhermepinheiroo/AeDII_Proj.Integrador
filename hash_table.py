@@ -37,3 +37,11 @@ class HashTable:
             if k == chave:
                 return v
         return None  
+
+    def deletar(self, chave: str) -> bool:
+        indice = self.funcao_hash(chave)
+        for i, (k, v) in enumerate(self.tabela[indice]):
+            if k == chave:
+                del self.tabela[indice][i]
+                return True
+        return False
