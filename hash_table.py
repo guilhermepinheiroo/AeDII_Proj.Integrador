@@ -30,3 +30,10 @@ class HashTable:
                 return
         self.tabela[indice].append((chave, valor))
 
+
+    def buscar(self, chave: str) -> dict | None:
+        indice = self.funcao_hash(chave)
+        for k, v in self.tabela[indice]:
+            if k == chave:
+                return v
+        return None  
