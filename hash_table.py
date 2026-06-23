@@ -1,5 +1,5 @@
 class HashTable:
-    def __init__(self, size = 10) -> None:
+    def __init__(self, size = 7) -> None:
         self.size = size
         self.tabela = [ [] for _ in range(size)]
 
@@ -21,3 +21,12 @@ class HashTable:
         imagem_hash = imagem_hash % primo
 
         return imagem_hash % self.size
+
+    def inserir(self, chave: str, valor: dict) -> None:
+        indice = self.funcao_hash(chave)
+        for i, (k, v) in enumerate(self.tabela[indice]):
+            if k == chave:
+                self.tabela[indice][i] = (chave, valor)
+                return
+        self.tabela[indice].append((chave, valor))
+
