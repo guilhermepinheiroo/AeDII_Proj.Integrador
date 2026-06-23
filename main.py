@@ -1,5 +1,67 @@
+import heapq
+from collections import deque
+
 ocorrencias = []
 ordem = []
+
+fila_chegada = deque()
+heap_prioridade = []
+contador_heap = 0
+
+class BST:
+    def __init(self, chave, ocorrencia):
+    self.chave = chave
+    self.ocorrencia = ocorrencia
+    self.esquerda = None
+    self.direita = None
+
+class ArvoreBST:
+    def __init(self):
+        self.raiz = None
+
+    def inserir(self, chave, ocorrencia):
+        if self.raiz is None:
+            self.raiz = BST(chave, ocorrencia)
+        else:
+            self._inserir(self.raiz, chave, ocorrencia)
+
+    def _inserir(self, no, chave, ocorrencia):
+        if chave < no.chave:
+            if no.esquerda is None:
+                no.esquerda = BST(chave, ocorrencia)
+            else:
+                self.inserir(no.esquerda, chave, ocorrencia)
+        elif chave > no.chave:
+            if no.direita is None:
+                no.direita = BST(chave, ocorrencia)
+            else:
+                self._inserir(no.direita, chave, ocorrencia)
+        else:
+            if isinstance(no.ocorrencia, list):
+                no.ocorrencia.append(ocorrencia)
+            else:
+                no.ocorrencia = [no.ocorrencia, ocorrencia]
+
+    def buscar(self, chave):
+        return self.buscar(self.raiz, chave)
+    
+    def _buscar(self, no, chave):
+        if no is None:
+            return None
+        if chave == no.chave:
+            return no.ocorrencia
+        elif chave < no.chave:
+            return self._buscar(no.esquerda, chave)
+        else:
+            return self._buscar(no.direira, chave)
+        
+arvore_ids = ArvoreBST()
+
+def extrair_codigo_id(id_ocorrencia):
+    try:
+        return int(id_ocorrencia.split("-")[-1])
+    except (ValueError, IndexError):
+        return 0
 
 def gerar_id(nome):
     soma = 0
