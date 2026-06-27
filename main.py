@@ -30,7 +30,7 @@ class ArvoreBST:
             if no.esquerda is None:
                 no.esquerda = BST(chave, ocorrencia)
             else:
-                self.inserir(no.esquerda, chave, ocorrencia)
+                self._inserir(no.esquerda, chave, ocorrencia)
         elif chave > no.chave:
             if no.direita is None:
                 no.direita = BST(chave, ocorrencia)
@@ -43,7 +43,7 @@ class ArvoreBST:
                 no.ocorrencia = [no.ocorrencia, ocorrencia]
 
     def buscar(self, chave):
-        return self.buscar(self.raiz, chave)
+        return self._buscar(self.raiz, chave)
     
     def _buscar(self, no, chave):
         if no is None:
@@ -53,7 +53,7 @@ class ArvoreBST:
         elif chave < no.chave:
             return self._buscar(no.esquerda, chave)
         else:
-            return self._buscar(no.direira, chave)
+            return self._buscar(no.direita, chave)
         
 arvore_ids = ArvoreBST()
 
@@ -121,7 +121,7 @@ def cadastrar_ocorrencia():
     arvore_ids.inserir(extrair_codigo_id(id_ocorrencia), nova_ocorrencia)
 
     hash_inserir(hash_nome, nome, nova_ocorrencia)
-    hash_inserir(hash_tipo, nome, nova_ocorrencia)
+    hash_inserir(hash_tipo, tipo, nova_ocorrencia)
 
     print("\n=== Ocorrência cadastrada! ====")
     print("ID:", id_ocorrencia)
@@ -172,13 +172,14 @@ def atender_ordem_chegada():
     while fila_chegada:
         ocorrencia = fila_chegada.popleft()
         if ocorrencia["status"] == "Aberto":
-            ocorrencia["status"] == "Atendido"
+            ocorrencia["status"] = "Atendido"
             print("\nOcorrência atendida:")
             print("ID:", ocorrencia['id'])
             print("Nome:", ocorrencia['nome'])
             print("Tipo:", ocorrencia['tipo'])
             print("Descrição", ocorrencia['descricao'])
             print("Prioridade:", ocorrencia['prioridade'])
+
             return
         
     print("Não há ocorrencias em aberto para atender")
@@ -187,15 +188,18 @@ def atender_maior_prioridade():
     print("\nATENDER POR MAIOR PRIORIDADE")
 
     while heap_prioridade:
-        prioridade_neg, _, ocorrencia = heap_prioridade(heap_prioridade)
+        prioridade_neg, ordem, ocorrencia = heapq.heappop(heap_prioridade)
+
         if ocorrencia["status"] == "Aberto":
-           ocorrencia["status"] == "Atendido"
+           ocorrencia["status"] = "Atendido"
+
            print("\nOcorrência atendida:")
            print("ID:", ocorrencia['id'])
            print("Nome:", ocorrencia['nome'])
            print("Tipo:", ocorrencia['tipo'])
            print("Descrição:", ocorrencia['descricao'])
            print("Prioridade:", -prioridade_neg)
+
            return
         
     print("Não há ocorrencias em baerto para atender")
@@ -250,7 +254,7 @@ while True:
     elif opcao == "5":
         atender_maior_prioridade()
     elif opcao == "6":
-        buscar_nome_ou_tipo
+        buscar_nome_ou_tipo()
     elif opcao == "0":
         print("Saindo...")
         break
