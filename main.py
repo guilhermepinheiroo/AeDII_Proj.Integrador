@@ -244,6 +244,15 @@ def exibir_historico():
         return
     for i in range(len(historico) -1, -1, -1):
         print(historico[i])
+
+def desfazer_ultima_acao():
+    if not historico:
+        print("Nenhuma ação para desfazer no momento")
+        return
+    ultima_acao = historico.pop()
+
+    print(f"Ação desfeita: {ultima_acao}")
+    
         
 
 while True:
@@ -275,8 +284,9 @@ while True:
         buscar_nome_ou_tipo()
     elif opcao == "7":
         exibir_historico()
+    elif opcao == "8":
+        desfazer_ultima_acao()
     elif opcao == "0":
-    
         print("Saindo...")
         break
     else:
