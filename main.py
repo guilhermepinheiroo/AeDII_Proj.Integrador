@@ -7,6 +7,7 @@ ordem = []
 fila_chegada = deque()
 heap_prioridade = []
 contador_heap = 0
+historico = []
 
 class BST:
     def __init__(self, chave, ocorrencia):
@@ -131,6 +132,8 @@ def cadastrar_ocorrencia():
     print("Prioridade:", prioridade)
     print("Ordem de chegada:", len(ordem))
     print("Status:", status)
+    
+    historico.append(f"[CADASTRO] Ocorrência cadastrada | ID: {id_ocorrencia} | Nome: {nome} | Tipo: {tipo} | Prioridade: {prioridade}")
 
 def listar_ocorrencias():
     print("\nLISTA DE OCORRÊNCIAS")
@@ -180,6 +183,9 @@ def atender_ordem_chegada():
             print("Descrição", ocorrencia['descricao'])
             print("Prioridade:", ocorrencia['prioridade'])
 
+            historico.append(
+    f"[ATENDIMENTO] Ocorrência por ordem de chegada | ID: {ocorrencia['id']} | Nome: {ocorrencia['nome']} | Tipo: {ocorrencia['tipo']} | Prioridade: {ocorrencia['prioridade']}")
+
             return
         
     print("Não há ocorrencias em aberto para atender")
@@ -200,9 +206,12 @@ def atender_maior_prioridade():
            print("Descrição:", ocorrencia['descricao'])
            print("Prioridade:", -prioridade_neg)
 
+           historico.append(
+    f"[ATENDIMENTO] Atendimento por prioridade | ID: {ocorrencia['id']} | Nome: {ocorrencia['nome']} | Tipo: {ocorrencia['tipo']} | Prioridade: {-prioridade_neg}")
+           
            return
-        
-    print("Não há ocorrencias em baerto para atender")
+    print("Não há ocorrencias em aberto para atender")
+
 
 def buscar_nome_ou_tipo():
     print("\nBUSCAR OCORRÊNCIAS POR NOME OU TIPO")
@@ -228,6 +237,15 @@ def buscar_nome_ou_tipo():
     for o in resultados:
         print(f"ID: {o['id']} | Nome: {o['nome']} | Tipo: {o['tipo']} | Prioridade: {o['prioridade']}")
 
+def exibir_historico():
+    print("\nHISTÓRICO DE OCORRÊNCIAS")
+    if not historico:
+        print("Nenhuma ocorrência registrada no histórico.")
+        return
+    for i in range(len(historico) -1, -1, -1):
+        print(historico[i])
+        
+
 while True:
     print("\n===== MENU =====")
     print("1 - Cadastrar ocorrência")
@@ -236,8 +254,8 @@ while True:
     print("4 - Atender pela ordem de chegada")
     print("5 - Atender pela maior prioridade")
     print("6 - Buscar ocorrências por nome ou tipo")
-    print("7 -")
-    print("8 -")
+    print("7 - Ver histórico de ocorrências")
+    print("8 - Desfazer última ação")
     print("9 -")
     print("0 - Sair")
 
@@ -255,7 +273,10 @@ while True:
         atender_maior_prioridade()
     elif opcao == "6":
         buscar_nome_ou_tipo()
+    elif opcao == "7":
+        exibir_historico()
     elif opcao == "0":
+    
         print("Saindo...")
         break
     else:
