@@ -102,6 +102,7 @@ Ao cadastrar uma nova ocorrência, o sistema realiza automaticamente:
 ---
 
 ## Onde foi utilizada a pilha?
+    A pilha foi usada no histórico, realizando o LIFO(Last In, First Out) para empilhar o chamado e usando o .append para empilhar e .pop para desempilhar simulando um CTRL Z.
 
 
 ---
