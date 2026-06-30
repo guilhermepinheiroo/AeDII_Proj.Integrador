@@ -82,7 +82,7 @@ def gerar_id(nome):
     codigo = soma % 10000
     prefixo = nome[:3].upper()
 
-    return prefixo + "-" + str(codigo)
+    return prefixo + "-" + str(codigo) + str(len(ordem)+1)
 
 
 def cadastrar_ocorrencia():
