@@ -87,6 +87,7 @@ Ao cadastrar uma nova ocorrência, o sistema realiza automaticamente:
 5 - Atender pela maior prioridade
 6 - Buscar ocorrências por nome ou tipo
 7 - Ver histórico
+8 - Desfazer última ação
 0 - Sair
 ```
 
