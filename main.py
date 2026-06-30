@@ -133,7 +133,7 @@ def cadastrar_ocorrencia():
     print("Ordem de chegada:", len(ordem))
     print("Status:", status)
     
-    historico.append(f"[CADASTRO] Ocorrência cadastrada | ID: {id_ocorrencia} | Nome: {nome} | Tipo: {tipo} | Prioridade: {prioridade}")
+    historico.append(f"[CADASTRO] Ocorrência cadastrada | ID: {id_ocorrencia} | Nome: {nome} | Tipo: {tipo} | Prioridade: {prioridade} | Status: {status}")
 
 def listar_ocorrencias():
     print("\nLISTA DE OCORRÊNCIAS")
@@ -141,7 +141,7 @@ def listar_ocorrencias():
         print("Nenhuma ocorrência cadastrada.")
     else:
         for o in ocorrencias:
-            print(f"ID: {o['id']} | Nome: {o['nome']} | Tipo: {o['tipo']} | Prioridade: {o['prioridade']}")
+            print(f"ID: {o['id']} | Nome: {o['nome']} | Tipo: {o['tipo']} | Prioridade: {o['prioridade']} | Status: {o['status']}")
 
 
 def buscar_ocorrencia_id():
